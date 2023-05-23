@@ -3,11 +3,16 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('vestingdata', {
-      vestingNo: {
+      id: {
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
+        primaryKey: true,
+        references: {
+          model: 'userData',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       walletAddress: {
         type: Sequelize.STRING,

@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      userData.hasOne(models.vestingdata, { foreignKey: 'id' });
     }
   }
   userData.init(
     {
-      vestingNo: DataTypes.INTEGER,
       beneficiaryAddress: DataTypes.STRING,
       totalTokens: DataTypes.DECIMAL(38, 18),
       claimedTokens: DataTypes.DECIMAL(38, 18),

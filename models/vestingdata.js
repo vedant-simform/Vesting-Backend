@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class vestingdata extends Model {
     /**
@@ -9,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      vestingdata.belongsTo(models.userData, { foreignKey: 'id' });
     }
   }
   vestingdata.init(
     {
-      vestingNo: DataTypes.INTEGER,
       walletAddress: DataTypes.STRING,
       vestingID: DataTypes.INTEGER,
       network: DataTypes.INTEGER,
@@ -31,5 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     },
   );
+
+  // userdata.hasOne(vestingdata);
   return vestingdata;
 };

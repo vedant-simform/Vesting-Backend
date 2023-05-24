@@ -10,7 +10,7 @@ const setclaim = async (req, res) => {
       include: [
         {
           model: vestingdata,
-          attributes: [],
+          attributes: ['vestingID'],
           where: { network },
         },
       ],

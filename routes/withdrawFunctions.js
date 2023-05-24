@@ -1,6 +1,7 @@
 const express = require('express');
+const { withdraw } = require('../controllers/withdraw');
 const router = new express.Router();
 
-// const
+router.put('/withdraw', withdraw);
 
 module.exports = router;

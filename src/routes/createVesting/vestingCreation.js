@@ -1,9 +1,12 @@
 const express = require('express');
-const { createVesting } = require('../controllers/createVesting');
-const { authorization } = require('../middleware/authorization');
+const {
+  createVesting,
+} = require('../../controllers/createVesting/createVesting');
+
+const { authorization } = require('../../middleware/authorization');
 const {
   vestingCreationValidation,
-} = require('../middleware/vestingCreationValidation');
+} = require('../../validation/validator/vestingCreationValidation');
 const router = new express.Router();
 
 router.post(

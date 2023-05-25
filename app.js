@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 require('dotenv').config();
-const authentication = require('./src/routes/authentication');
-const vestingCreation = require('./src/routes/vestingCreation');
-const withdrawFunctions = require('./src/routes/withdrawFunctions');
-const claimToken = require('./src/routes/claimToken');
+const authentication = require('./src/routes/authentication/authentication');
+const vestingCreation = require('./src/routes/createVesting/vestingCreation');
+const withdrawFunctions = require('./src/routes/withdraw/withdrawFunctions');
+const claimToken = require('./src/routes/claimTokens/claimToken');
 const port = process.env.PORT;
 
 app.use(express.json());

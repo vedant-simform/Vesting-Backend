@@ -1,4 +1,4 @@
-const { sequelize } = require('../../models');
+const { sequelize } = require('../../../models');
 const vestingdata = sequelize.models.vestingdata;
 const userData = sequelize.models.userData;
 
@@ -50,8 +50,6 @@ const createVesting = async (req, res) => {
     console.log(error);
     res.status(501).json({ error });
   }
-
-  //   console.log(vestingdata);
 };
 
 module.exports = { createVesting };

@@ -1,4 +1,4 @@
-const { vestingdata, userData } = require('../../models');
+const { vestingdata, userData } = require('../../../models');
 
 const getclaim = async (req, res) => {
   try {

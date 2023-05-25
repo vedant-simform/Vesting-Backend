@@ -1,5 +1,5 @@
 const { Decimal } = require('decimal.js');
-const { vestingdata, userData } = require('../../models');
+const { vestingdata, userData } = require('../../../models');
 
 const withdraw = async (req, res) => {
   const { amount, beneficiaryAddress, network, vestingID, getclaimableTokens } =

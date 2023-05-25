@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const schema = Joi.object({
+const createSchema = Joi.object({
   beneficiaryAddress: Joi.string().required().length(42),
   totalTokens: Joi.number().required().precision(18),
   claimedTokens: Joi.number().required().precision(18),
@@ -17,13 +17,4 @@ const schema = Joi.object({
   tokenSymbol: Joi.string().required(),
 });
 
-const vestingCreationValidation = (req, res, next) => {
-  const { error } = schema.validate(req.body, { abortEarly: false });
-  if (error) {
-    return res.status(403).json({ message: 'Invalid API Call' });
-  } else {
-    next();
-  }
-};
-
-module.exports = { vestingCreationValidation };
+module.exports = { createSchema };

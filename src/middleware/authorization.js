@@ -10,6 +10,7 @@ const authorization = async (req, res, next) => {
 
   try {
     const decode = jwt.verify(token, process.env.SECRET_KEY);
+   
     req.user = decode.address;
     next();
   } catch (error) {

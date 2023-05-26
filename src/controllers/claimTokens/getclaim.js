@@ -1,6 +1,7 @@
 const { vestingdata, userData } = require('../../../models');
 
 const getclaim = async (req, res) => {
+  
   try {
     const beneficiaryAddress = req.params.beneficiary;
     const network = req.params.network;
@@ -18,10 +19,9 @@ const getclaim = async (req, res) => {
         ],
         where: { beneficiaryAddress },
       });
-
       res.status(200).json({ response });
     } else {
-      res.status(401).json({ message: 'Unauthorized user' });
+      res.status(401).json({ message: 'Unauthorizedn user' });
     }
   } catch (error) {
     console.log(error);

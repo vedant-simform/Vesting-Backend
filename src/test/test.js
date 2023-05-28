@@ -16,20 +16,19 @@ const sequelize = new Sequelize(
 );
 
 describe('Back-end Testing', async () => {
- 
-  beforeEach(async () => {
+  before(async () => {
     execSync('npx sequelize-cli db:migrate --env test', {
       stdio: 'inherit',
     });
+  });
+
+  beforeEach(async () => {
     await sequelize.sync({ force: true });
     await sequelize.authenticate();
   });
   it('Claim Tokens', async () => {
     const address = '0xcc1190D3Aad29b3E29FD435B793A830e8ccFE464';
-    const token =  jwt.sign(
-        {address},
-      process.env.SECRET_KEY,
-    );
+    const token = jwt.sign({ address }, process.env.SECRET_KEY);
     const response = await fetch(
       'http://localhost:5000/claim/0xcc1190D3Aad29b3E29FD435B793A830e8ccFE464/80001/0',
       {
@@ -44,25 +43,39 @@ describe('Back-end Testing', async () => {
 
     expect(response.status).to.equal(200);
     expect(claimData).to.be.an('object');
-    expect(claimData.response.claimedTokens).to.equal(Number(0).toPrecision(19));
-
-  });
-  it("Database Entry",async()=>{
-    const address = '0xcc1190D3Aad29b3E29FD435B793A830e8ccFE464';
-    const token =  jwt.sign(
-        {address},
-      process.env.SECRET_KEY,
+    expect(claimData.response.claimedTokens).to.equal(
+      Number(0).toPrecision(19),
     );
-    const response = await fetch('http://localhost:5000/withdrawFunctions',{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json',
-            Authorization:`Bearer ${token}`
+  });
+  it('Database Entry', async () => {
+    const address = '0xcc1190D3Aad29b3E29FD435B793A830e8ccFE464';
+    const token = jwt.sign({ address }, process.env.SECRET_KEY);
+    const apiBody = {
+      beneficiaryAddress: '0xcc1190D3Aad29b3E29FD435B793A830e8ccFE464',
+      totalTokens: 2.364824,
+      claimedTokens: 0,
+      claimableTokens: 0,
+      walletAddress: address,
+      vestingID: 0,
+      network: 80001,
+      startDate: 16 / 05 / 2023,
+      endDate: 17 / 05 / 2023,
+      cliff: 0,
+      slice: 0,
+      tokenAddress: '0x25dcF0D3Aad29b3E29FD435B793A830e8ccFE464',
+      tokenName: 'test coin',
+      tokenSymbol: 'TVDS',
+    };
+    try {
+      await fetch('http://localhost:5000/createVesting', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
-        body:{
-            
-        }
-        
-    })
-  })
+        body: JSON.stringify(apiBody),
+      });
+    } catch (error) {}
+  });
+  it('withdraw functionality', async () => {});
 });

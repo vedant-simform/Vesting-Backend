@@ -15,6 +15,8 @@ app.use(vestingCreation);
 app.use(claimToken);
 app.use(withdrawFunctions);
 
-app.listen(port, () => {
-  console.log('Server running at port:- ', port);
+const server = app.listen(port, () => {
+  console.log('Server running at port:', port);
 });
+
+module.exports = server;

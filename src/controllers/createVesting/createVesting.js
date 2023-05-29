@@ -2,8 +2,13 @@ const { sequelize } = require('../../../models');
 const vestingdata = sequelize.models.vestingdata;
 const userData = sequelize.models.userData;
 
+
+
+
 const createVesting = async (req, res) => {
+
   try {
+    console.log(process.env.NODE_ENV);
     const {
       beneficiaryAddress,
       totalTokens,
@@ -20,7 +25,6 @@ const createVesting = async (req, res) => {
       tokenName,
       tokenSymbol,
     } = await req.body;
-
     if (req.user == walletAddress) {
       const insertedData = await userData.create({
         beneficiaryAddress,
@@ -42,7 +46,7 @@ const createVesting = async (req, res) => {
         tokenSymbol,
       });
 
-      res.status(200).json({ message: 'Data added Sucessfully' });
+      res.status(200).json({ message: 'Data added Successfully' });
     } else {
       res.status(401).json({ message: 'Unauthorized user' });
     }

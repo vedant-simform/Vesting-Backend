@@ -9,7 +9,6 @@ const login = async (req, res) => {
     });
     res.status(200).json({ token });
   } catch (error) {
-    console.log(error);
     res.status(422).json({ error });
   }
 };

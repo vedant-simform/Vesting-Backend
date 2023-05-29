@@ -8,7 +8,6 @@ const userData = sequelize.models.userData;
 const createVesting = async (req, res) => {
 
   try {
-    console.log(process.env.NODE_ENV);
     const {
       beneficiaryAddress,
       totalTokens,
@@ -51,7 +50,6 @@ const createVesting = async (req, res) => {
       res.status(401).json({ message: 'Unauthorized user' });
     }
   } catch (error) {
-    console.log(error);
     res.status(501).json({ error });
   }
 };

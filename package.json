@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha  spec/test/test.js "
+    "test": "NODE_ENV=test mocha  spec/test/test.js --exit",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +24,13 @@
   "devDependencies": {
     "chai": "^4.3.7",
     "cross-env": "^7.0.3",
+    "husky": "^8.0.0",
     "mocha": "^10.2.0",
     "supertest": "^6.3.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
   }
 }

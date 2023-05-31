@@ -7,6 +7,8 @@ const vestingCreation = require('./src/routes/createVesting/vestingCreation');
 const withdrawFunctions = require('./src/routes/withdraw/withdrawFunctions');
 const claimToken = require('./src/routes/claimTokens/claimToken');
 const port = process.env.PORT;
+const signature = require('./src/routes/signature/signature')
+
 
 app.use(express.json());
 app.use(cors());
@@ -14,6 +16,7 @@ app.use(authentication);
 app.use(vestingCreation);
 app.use(claimToken);
 app.use(withdrawFunctions);
+app.use(signature)
 
 const server = app.listen(port, () => {
   console.log('Server running at port:', port);
